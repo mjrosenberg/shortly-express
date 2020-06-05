@@ -76,12 +76,20 @@ app.post('/links', (req, res, next) => {
 // Write your authentication routes here
 /************************************************************/
 app.post('/signup', (req, res, next) =>{
-  //console.log(req.body);
-  return models.Users.create(req.body)
-    .then((users) => {}) //need to redirect signups if the user already exists
-    .then((users) =>{ res.json(users); }) //sending the list of user objects back as a response
-    .catch(()=> {
-      res.sendStatus(404); //handles errors
+  return models.Users.get({username: req.body.username})
+    .then((data) => {
+      if (data) {
+        res.redirect('/signup');
+      } else {
+        return models.Users.create(req.body)
+          .then((users) =>{
+            //res.json(users);
+            res.redirect('/');
+          })
+          .catch(()=> {
+            res.sendStatus(404); //handles errors
+          });
+      }
     });
 });
 

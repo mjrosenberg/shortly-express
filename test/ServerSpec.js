@@ -134,7 +134,7 @@ describe('', function() {
           'password': 'Samantha'
         }
       };
-
+      //console.log('creates new user');
       request(options, function(error, res, body) {
         var queryString = 'SELECT * FROM users where username = "Samantha"';
         //console.log(res);
@@ -159,7 +159,7 @@ describe('', function() {
           'password': 'Samantha'
         }
       };
-
+      //console.log('doesnt store password as text test');
       request(options, function(error, res, body) {
         if (error) { return done(error); }
         var queryString = 'SELECT password FROM users where username = "Samantha"';
@@ -182,7 +182,7 @@ describe('', function() {
           'password': 'Samantha'
         }
       };
-
+      //console.log('start redirect to sign up test');
       request(options, function(error, res, body) {
         if (error) { return done(error); }
         request(options, function(err, response, resBody) {
@@ -202,7 +202,7 @@ describe('', function() {
           'password': 'Samantha'
         }
       };
-
+      console.log('start redirect to index after creation test');
       request(options, function(error, res, body) {
         if (error) { return done(error); }
         expect(res.headers.location).to.equal('/');
