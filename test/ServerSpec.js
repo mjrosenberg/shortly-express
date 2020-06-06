@@ -354,7 +354,7 @@ describe('', function() {
           expect(cookies).to.be.an('object');
           expect(cookies).to.eql({});
         });
-        console.log('working for reqWithoutCookies');
+        //console.log('working for reqWithoutCookies');
         cookieParser(requestWithCookies, response, function() {
           var cookies = requestWithCookies.cookies;
           expect(cookies).to.be.an('object');
@@ -383,12 +383,13 @@ describe('', function() {
         createSession(requestWithoutCookies, response, function() {
           var session = requestWithoutCookies.session;
           expect(session).to.exist;
+          //console.log('session exists but hash doesnt');
           expect(session).to.be.an('object');
           expect(session.hash).to.exist;
           done();
         });
       });
-
+      //console.log('first test finishing');
       it('sets a new cookie on the response when a session is initialized', function(done) {
         var requestWithoutCookie = httpMocks.createRequest();
         var response = httpMocks.createResponse();

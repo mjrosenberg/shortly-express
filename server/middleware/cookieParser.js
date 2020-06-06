@@ -1,15 +1,15 @@
 const parseCookies = (req, res, next) => {
-  console.log(req.headers);
+  //console.log('req.headers', req.headers);
   if (req.headers.cookie !== undefined) {
     var cookieList = req.headers.cookie.split('; ');
-    console.log(cookieList);
+    //console.log(cookieList);
     for (item of cookieList) {
       var newList = item.split('=');
-      console.log(newList);
+      //console.log(newList);
       req.cookies[newList[0]] = newList[1];
     }
-
-    console.log(req.cookies);
+    //unsure if we are supposed to be modifying the request, but that is what the tests essentially say to do
+    //console.log(req.cookies);
   }
   next();
 };
