@@ -92,6 +92,20 @@ app.post('/signup', (req, res, next) =>{
       }
     });
 });
+app.post('/login', (req, res, next) =>{
+  return models.Users.get({username: req.body.username})
+    .then((data) => {
+      if (data) {
+        if (models.Users.compare(req.body.password, data.password, data.salt)) {
+          res.redirect('/');
+        } else {
+          res.redirect('/login');
+        }
+      } else {
+        res.redirect('/login');
+      }
+    });
+});
 
 
 /************************************************************/
